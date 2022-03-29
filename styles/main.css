@@ -1,11 +1,11 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border-style: none;
-    text-decoration: none;
-    list-style: none;
-    color: inherit;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-style: none;
+  text-decoration: none;
+  list-style: none;
+  color: inherit;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
@@ -24,7 +24,6 @@
   font-size: 30px;
   color: darkmagenta;
   margin-bottom: 30px;
-  
 }
 
 .subtitle {
@@ -34,22 +33,22 @@
 }
 
 .item-box {
-    margin: 3px;
-    padding: 5px 10px;
+  margin: 3px;
+  padding: 5px 10px;
 }
 
 .select-item {
-    padding: 5px 10px;
+  padding: 5px 10px;
 }
 
 .play-message {
-    color: blueviolet;
+  color: blueviolet;
 }
 
 .amount {
-    color: darkmagenta;
-    font-size: 14px;
-    margin-top: 30px;
+  color: darkmagenta;
+  font-size: 14px;
+  margin-top: 30px;
 }
 
 .button {
