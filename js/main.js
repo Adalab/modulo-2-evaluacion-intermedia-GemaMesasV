@@ -34,6 +34,7 @@ function handleClickBtn(event) {
       resetBtn.classList.remove("hidded-button");
       playBtn.classList.add("hidded-button");
     }
+    
   } else {
     //  no coincide número
     message.innerHTML = "Has perdido lo apostado 😰";
