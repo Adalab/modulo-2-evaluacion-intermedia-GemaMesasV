@@ -1,3 +1,4 @@
+"use strict";
 // selector de número
 const numberSelect = document.querySelector(".js_select");
 // caja de cuánto apuesto
