@@ -6,11 +6,13 @@ const numberInput = document.querySelector(".js_item-box");
 // botón de jugar
 const playBtn = document.querySelector(".js_play-button");
 // mensaje de si he ganado o he perdido
-const message = document.querySelector(".js_final-message");
+const messageContainer = document.querySelector(".js_final-message");
 // saldo que tengo
-const amount = document.querySelector(".js_amount");
+const amountBox = document.querySelector(".js_amount");
 // botón de reset
 const resetBtn = document.querySelector(".js_reset-button");
+
+const amountToWin = 200;
 
 let balance = 50;
 
@@ -18,29 +20,67 @@ function getRandomNumber(max) {
   return Math.ceil(Math.random() * max);
 }
 
-function handleClickBtn(event) {
-  event.preventDefault();
-  const selectedNumber = numberSelect.value;
+function renderMessage(msg) {
+  messageContainer.innerHTML = msg;
+}
+function renderAmount() {
+  amountBox.innerHTML = `Saldo: ${balance}`
+}
+
+function changeBalance(num) {
+  balance += num;
+}
+
+function winCheck() {
+  if (balance >= amountToWin) {
+    resetBtn.classList.remove("hidded-button");
+    playBtn.classList.add("hidded-button");
+    renderMessage("¡Has ganado el juego, gracias por jugar! 💰💰💰");
+  }
+}
+
+function canBet() {
   const betAmount = numberInput.value;
-  const numAleat = getRandomNumber(6);
   if (betAmount > balance) {
-    message.innerHTML = "No puedes apostar más dinero que tu saldo 💰";
-  } else if (numAleat == selectedNumber) {
+    renderMessage("No puedes apostar más dinero que tu saldo 💰");
+    return false
+  }
+  else return true
+}
+
+function winBet() {
+  const betAmount = numberInput.value;
+  renderMessage("Has ganado el doble de lo apostado 😎");
+  changeBalance(betAmount * 2);
+  renderAmount();
+}
+
+function loseBet() {
+  const betAmount = numberInput.value;
+  renderMessage("Has perdido lo apostado 😰");
+  changeBalance(-betAmount);
+  renderAmount();
+}
+
+function checkBet() {
+  const selectedNumber = parseInt(numberSelect.value);
+  const numAleat = getRandomNumber(6);
+  if (numAleat === selectedNumber) {
     //  coincide número
-    message.innerHTML = "Has ganado el doble de lo apostado 😎";
-    balance = betAmount * 2 + balance;
-    amount.innerHTML = `Saldo: ${balance}`;
+    winBet();
     // comprobación saldo para ganar
-    if (balance >= 200) {
-      resetBtn.classList.remove("hidded-button");
-      playBtn.classList.add("hidded-button");
-    }
+    winCheck();
   } else {
     //  no coincide número
-    message.innerHTML = "Has perdido lo apostado 😰";
-    balance = balance - betAmount;
-    amount.innerHTML = `Saldo: ${balance}`;
+    loseBet();
   }
+}
+
+function handleClickBtn(event) {
+  event.preventDefault();
+  if (canBet()) {
+    checkBet();
+  } 
 }
 
 playBtn.addEventListener("click", handleClickBtn);
